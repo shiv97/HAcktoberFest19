@@ -1,0 +1,21 @@
+server:
+  port: 8000
+  profiles: development
+spring:
+  datasource:
+    jdbcUrl: jdbc:postgresql://localhost:5432/ftdc
+    url: jdbc:postgresql://localhost:5432/ftdc
+    driverClassName: org.postgresql.Driver
+    dialect: org.hibernate.dialect.PostgreSQLDialect
+    username: postgres
+    password: $Tidelpark2018
+
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        jdbc:
+          lob:
+            non_contextual_creation: true
+    hibernate:
+      ddl-auto: update

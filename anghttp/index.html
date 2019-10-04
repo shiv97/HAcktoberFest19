@@ -1,0 +1,63 @@
+<html ng-app="testApp">
+  <head>
+    <title>AngularJS $Http service tutorial example</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
+  </head>
+  <body ng-controller="testController">
+    <h2>$http Service</h2>
+    <button ng-click="getRequest()">Test Rest</button>
+    <script>
+	console.log("i am inside create table")
+var testApp = angular.module('testApp', [])
+    .config(function($httpProvider) {
+        $httpProvider.defaults.useXDomain = true;
+        $httpProvider.defaults.withCredentials = true;
+    });
+
+testApp.controller("testController", function($scope, $http) {
+  $scope.home = "This is the homepage";
+
+  //    Our GET request function
+  $scope.getRequest = function() {
+    console.log("I've been pressed!");
+    $http.get("/users").then(
+      function successCallback(res) 
+	  {
+        $scope.response=res.data;
+		console.log($scope.response);
+	  },
+      function errorCallback(response) {
+        console.log("Unable to perform get request");
+      }
+    );
+  };
+
+  //    Our POST request function
+  $scope.postRequest = function() {
+    $http.post("/users", data).then(
+      function successCallback(response) {
+        console.log("Successfully POST-ed data");
+      },
+      function errorCallback(response) {
+        console.log("POST-ing of data failed");
+      }
+    );
+  };
+});
+</script>	
+	<table border="1">
+    <tbody ng-repeat="i in response">
+    <tr>
+	<td>{{i.actor_id}}</td>
+	<td>{{i.first_name}}</td>
+	<td>{{i.last_name}}</td>
+	<td>{{i.last_update}}</td>
+	</tr>
+    </tbody>
+    </table>
+</body>
+</html>
+
+
+
+

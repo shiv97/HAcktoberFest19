@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="blackjack">
+<head>
+  <meta charset="UTF-8">
+  <title>MEAN Blackjack</title>
+
+  <!-- Vendor CSS -->
+  <link rel="stylesheet" href="public/css/bootstrap.min.css">
+  <link rel="stylesheet" href="public/vendor/angular-toastr/dist/angular-toastr.min.css">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="public/css/style.css">
+</head>
+<body>
+
+  <header>
+    <div class="jumbotron">
+      <div class="container">
+        <h1>♠ MEAN Blackjack ♠</h1>
+      </div>
+    </div>
+  </header>
+
+  <div ui-view></div>
+
+  <footer>
+    <div class="container">
+      <hr>
+      <p>
+        Made with ❤ by <a href="https://github.com/ericdouglas">Eric Douglas</a>
+      </p>
+    </div>
+  </footer>
+  
+  <!-- Angular Vendor Scripts -->
+  <script src="public/vendor/angular/angular.min.js"></script>
+  <script src="public/vendor/ui-router/release/angular-ui-router.min.js"></script>
+  <script src="public/vendor/angular-animate/angular-animate.min.js"></script>
+  <script src="public/vendor/angular-toastr/dist/angular-toastr.tpls.min.js"></script>
+
+  <!-- Angular App Scripts -->
+  <script src="app.js"></script>
+
+  <!-- Home -->
+  <script src="home/home.controller.js"></script>
+  <script src="home/home.service.js"></script>
+
+  <!-- Room -->
+  <script src="room/room.controller.js"></script>
+  <script src="room/room.service.js"></script>
+
+  <!-- Result -->
+  <script src="result/result.controller.js"></script>
+  <script src="result/result.service.js"></script>
+
+  <!-- Helpers -->
+  <script src="helpers/dealer.service.js"></script>
+  
+</body>
+</html>

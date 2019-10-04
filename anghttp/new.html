@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+	<h5>
+	PAGE LINK
+	</h5><br>
+	<br>
+	<br>
+	<br>
+		<meta charset="utf-8"/>
+	
+
+		<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet" />
+
+		<!-- The main CSS file -->
+		<link href="style.css" rel="stylesheet" />
+
+		<!--[if lt IE 9]>
+			<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+		<![endif]-->
+	</head>
+
+	<!-- The ng-app directive tells angular that the code below should be evaluated -->
+
+	<body ng-app>
+    
+		<!-- The navigation menu will get the value of the "active" variable as a class.
+			 The $event.preventDefault() stops the page from jumping when a link is clicked. -->
+
+
+		<!-- ng-show will show an element if the value in the quotes is truthful,
+			 while ng-hide does the opposite. Because the active variable is not set
+			 initially, this will cause the first paragraph to be visible. -->
+
+
+		<p ng-show="active">You chose <b>{{active}}</b></p>
+<h1>
+			<a href="http://localhost:3000/users" class="table_view" ng-click="active='home'">JSON</a><br>
+	
+			<a href="http://localhost:8000/" class="json_data_view" ng-click="active='about'">TABLE</a><br>
+			<a href="file:///C:/Users/Siva%20Shankari/Desktop/anguname.html" class="Name" ng-click="active='Name'">Name</a>
+			<br>
+			</h1>
+		<!-- Include AngularJS from Google's CDN -->
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
+	</body>
+</html>

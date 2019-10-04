@@ -1,0 +1,125 @@
+<div ng-hide="vm.readyToGo"
+     class="container">
+  <div>
+    <h2>Set your wager</h2>
+  </div>
+  
+  <!-- wager box -->
+  <div class="list-group col-xs-4">
+    <div class="list-group-item active">
+      <h3 class="list-group-item-heading">
+        {{ vm.currentGambler.name }}
+      </h3>
+      <h3 class="list-group-item-text">
+        Total money: 
+        <span class="label label-default">
+          ${{ vm.currentGambler.money - vm.wager }}
+        </span>
+      </h3>
+    </div>
+    <div class="list-group-item">
+      <div class="input-group">
+        <span class="input-group-addon"
+              id="sizing-addon1">
+          $
+        </span>
+        <input type="text"
+               class="form-control"
+               ng-model="vm.wager">
+      </div>
+    </div>
+    <div class="list-group-item">
+      <button ng-click="vm.setWager( vm.currentGambler.id, vm.wager )"
+                class="btn btn-success btn-lg">
+        Ok
+      </button>
+    </div>
+  </div>
+</div>
+
+<div ng-show="vm.readyToGo"
+     class="container">
+  <div class="row">
+    <section class="col-md-6">
+      <!-- Actual Player Box -->
+      <div class="list-group col-xs-6">
+        <h3 class="list-group-item active"
+              ng-bind="vm.currentPlayer.name">
+        </h3>
+        <div class="btn btn-default"
+             ng-repeat="card in vm.currentPlayer.hand">
+          <h3>{{ card.name }}</h3> <h3>{{ card.suit }}</h3>
+        </div>
+        <div class="list-group-item">
+          <h4>
+            Wager: <span class="label label-primary">${{ vm.currentPlayer.wager }}</span>
+          </h4>
+          <h4>
+            Total: <span class="label label-default">${{ vm.currentPlayer.money }}</span>
+          </h4>
+          <h4>
+            Score: <span class="label label-primary">{{ vm.currentPlayer.score }}</span>
+          </h4>
+        </div>
+        <div>
+          <button ng-click="vm.playerAction( vm.currentPlayer, 'hit' )"
+                  class="btn btn-danger btn-lg">
+            Hit
+          </button>
+          <button ng-click="vm.playerAction( vm.currentPlayer, 'stand' )"
+                  class="btn btn-info btn-lg">
+            Stand
+          </button>
+        </div>
+      </div>
+    </section>
+    
+    <aside class="col-md-6">
+      <div class="list-group col-xs-6">
+        <!-- Dealer -->
+        <div class="list-group-item active">
+          <h4>Dealer</h4>
+          <div>
+            <h3>
+              <span class="label label-primary">
+                {{ vm.dealerData.hand[ 0 ].name }} {{ vm.dealerData.hand[ 0 ].suit }}
+              </span> &nbsp;
+              <span class="label label-danger">
+                ✖
+              </span>
+            </h3>
+          </div>
+        </div>
+        <!-- All Players -->
+        <div class="list-group-item"
+             ng-repeat="player in vm.playersData">
+          <h4 ng-bind="player.name"></h4>
+          <span>Score: {{ player.score }}</span>
+          <div class="standby-player-info">
+            <h3>
+              <div class="btn btn-primary"
+                    ng-repeat="card in player.hand">
+                {{ card.name }} {{ card.suit }}
+              </div>
+            </h3>
+            <div>
+              <strong>$</strong>
+              <span ng-bind="player.wager">
+              </span>
+               /
+              <strong> $</strong>
+              <span ng-bind="player.money">
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Quit -->
+        <div class="btn btn-danger btn-lg"
+             ng-click="vm.quit()">
+          Quit ✖
+        </div>
+      </div>
+    </aside>
+  </div>
+</div>

@@ -1,0 +1,103 @@
+//1
+SELECT DimEmployee.FirstName, DimEmployee.LastName, DimEmployee.EmailAddress
+FROM DimEmployee
+JOIN FactResellerSales
+ON FactResellerSales.SalesTerritoryKey=DimEmployee.SalesTerritoryKey
+JOIN DimReseller
+ON FactResellerSales.ResellerKey=DimReseller.ResellerKey;
+
+SELECT DimCustomer.FirstName, DimCustomer.LastName, DimCustomer.EmailAddress, DimReseller.ResellerName
+FROM DimCustomer
+JOIN DimGeography
+ON DimCustomer.GeographyKey = DimGeography.GeographyKey
+JOIN DimReseller
+ON DimGeography.GeographyKey=DimReseller.GeographyKey
+WHERE DimReseller.ResellerName LIKE 'Bike%';
+
+//2
+SELECT DimReseller.ResellerName
+FROM DimReseller
+JOIN DimGeography
+ON DimReseller.GeographyKey = DimGeography.GeographyKey
+WHERE DimGeography.City='Dallas';
+
+//3
+SELECT DISTINCT COUNT(*)
+FROM FactInternetSales
+WHERE UnitPrice>1000;
+
+//4
+SELECT DimReseller.ResellerName, FactResellerSales.TaxAmt, FactResellerSales.Freight
+FROM DimReseller
+JOIN FactResellerSales
+ON DimReseller.ResellerKey = FactResellerSales.ResellerKey
+WHERE FactResellerSales.SalesAmount>10000;
+
+//5
+select count(*) from DimProduct join FactResellerSales on DimProduct.ProductKey=FactResellerSales.ProductKey
+join DimReseller on FactResellerSales.ResellerKey=DimReseller.Resellerkey where EnglishProductName='Racing Socks, L' and ResellerName='Riding Cycles';
+
+//6
+SELECT FactResellerSales.SalesOrderNumber, FactResellerSales.UnitPrice
+FROM FactResellerSales
+WHERE FactResellerSales.OrderQuantity=1;
+
+//7 product description for culture 'fr' for product with ProductID 736.
+SELECT [FrenchDescription]
+  FROM [AdventureWorksDW2017].[dbo].[DimProduct]
+  WHERE ProductKey=736;
+
+//8
+select weight,totalproductcost as subtotal from DimProduct join FactResellerSales on DimProduct.ProductKey=FactResellerSales.ProductKey 
+join DimReseller on FactResellerSales.ResellerKey=DimReseller.ResellerKey order by TotalProductCost desc;
+ 
+
+
+SELECT DimReseller.ResellerName, DimProduct.Weight, FactResellerSales.SalesAmount
+FROM DimProduct,DimReseller
+JOIN FactResellerSales
+ON DimReseller.ResellerKey = FactResellerSales.ResellerKey
+ORDER BY FactResellerSales.OrderQuantity DESC;
+
+//9
+SELECT DimCustomer.FirstName, DimReseller.AddressLine1, DimReseller.AddressLine2 as Shippingaddress
+FROM DimCustomer
+JOIN DimGeography
+ON DimCustomer.GeographyKey = DimGeography.GeographyKey
+JOIN DimReseller
+ON DimGeography.GeographyKey=DimReseller.GeographyKey
+WHERE DimGeography.City='Dallas';
+//10
+SELECT (FactInternetSales.UnitPrice * FactInternetSales.OrderQuantity) as pdtUPOQ, (FactInternetSales.UnitPrice + DimProduct.ListPrice) as UPLP
+FROM FactInternetSales
+JOIN DimProduct
+ON DimProduct.ProductKey = FactInternetSales.ProductKey;
+//11
+SELECT COUNT (DISTINCT FactInternetSales.SalesAmount)
+FROM FactInternetSales
+WHERE SalesAmount BETWEEN 0 AND 99;
+SELECT COUNT (DISTINCT FactInternetSales.SalesAmount)
+FROM FactInternetSales
+WHERE SalesAmount BETWEEN 99 AND 1000;
+SELECT COUNT (DISTINCT FactInternetSales.SalesAmount)
+FROM FactInternetSales
+WHERE SalesAmount BETWEEN 1001 AND 10000;
+SELECT COUNT (DISTINCT FactInternetSales.SalesAmount)
+FROM FactInternetSales
+WHERE SalesAmount>10000;
+//12
+SELECT top (3) DimGeography.City
+FROM DimReseller
+JOIN DimGeography
+ON DimGeography.GeographyKey=DimReseller.GeographyKey
+ORDER BY DimReseller.OrderFrequency DESC;
+
+//13
+select count(*) from DimProductSubcategory join DimProduct on DimProductSubcategory.ProductSubcategoryKey=DimProduct.ProductSubcategoryKey join factresellersales on dimproduct.productkey=FactResellerSales.ProductKey
+join DimReseller on dimreseller.resellerkey=FactResellerSales.resellerkey 
+join DimGeography on dimreseller.GeographyKey=DimGeography.GeographyKey where city ='London' and EnglishProductSubcategoryName='cranksets';
+
+//racing socks
+select count(*) from DimProduct join FactResellerSales on DimProduct.ProductKey=FactResellerSales.ProductKey
+join DimReseller on FactResellerSales.ResellerKey=DimReseller.Resellerkey where EnglishProductName='Racing Socks, L' and ResellerName='Riding Cycles';
+

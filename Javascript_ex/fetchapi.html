@@ -1,0 +1,17 @@
+<html>
+<head><B>FETCH API</B></head>
+<title><h1>Actors</h1></title>
+<body bgcolor="Tomato">
+<script language="javascript" type="text/javascript">
+<!--
+const url="http://localhost:3000/users";
+const ul = document.getElementById('actor_id');
+//const proxyurl = "https://cors-anywhere.herokuapp.com/";
+fetch(url)
+.then(response => response.text())
+.then(contents => console.log(contents))
+.catch(() => console.log("Can’t access " + url + " response. Blocked by browser?"))
+//-->
+</script>
+</body>
+</html>
